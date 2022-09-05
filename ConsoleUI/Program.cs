@@ -13,18 +13,10 @@ namespace ConsoleUI
         static void Main(string[] args)
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            carManager.Add(new Car 
+            
+            foreach (var car in carManager.GetCarDetails())
             {
-                Id = 1,
-                BrandId=3,
-                ColorId=5,
-                DailyPrice=500,
-                ModelYear=2015,
-                Description="Hyundai"//veri ekleme hatası veriyor.
-            });
-            foreach (var car in carManager.GetAll())
-            {
-                Console.WriteLine(car.Description);
+                Console.WriteLine("{0} - {1} - {2} - {3}",car.CarName,car.BrandName,car.ColorName,car.DailyPrice);
             }
         }
     }
