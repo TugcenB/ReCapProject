@@ -27,8 +27,18 @@ namespace ConsoleUI
             //AddCarTest(); -success
             //DeleteCarTest(); -success
             //UpdateCarTest(); -fail
-            //GetAllCarsTest(); -fail
-            //GetByIdCarTest(); -fail
+            //GetAllCarsTest(); -success
+            //GetByIdCarTest(); -success
+
+            //UpdateCarTest2(); -success
+            
+            
+        }
+
+        private static void UpdateCarTest2()
+        {
+            CarManager carManager = new CarManager(new EfCarDal());
+            carManager.Update(new Car { Id = 1, BrandId = 1, ColorId = 1, DailyPrice = 600, Description = "Captiva", ModelYear = 2012 });
         }
 
         private static void GetByIdCarTest()
@@ -40,9 +50,9 @@ namespace ConsoleUI
         private static void GetAllCarsTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            foreach (var car in carManager.GetAll())
+            foreach (var car in carManager.GetCarDetails())
             {
-                Console.WriteLine(car.Id);
+                Console.WriteLine("{0} - {1} - {2} - {3}",car.BrandName,car.Description,car.ColorName,car.DailyPrice);
             }
         }
 
@@ -51,6 +61,7 @@ namespace ConsoleUI
             CarManager carManager = new CarManager(new EfCarDal());
             carManager.Update(new Car { Id = 1, BrandId = 1, ColorId = 1, DailyPrice = 600 });
             //Daily price has been updated, but model year and description has turned to null !!!
+            //we have to add model year and description also
         }
 
         private static void DeleteCarTest()

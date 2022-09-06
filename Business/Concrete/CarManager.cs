@@ -47,10 +47,10 @@ namespace Business.Concrete
             return _carDal.GetById(c=>c.Id==id);
         }
 
-        //public List<CarDetailDto> GetCarDetails()
-        //{
-        //    return _carDal.GetCarDetails();
-        //}
+        public List<CarDetailDto> GetCarDetails()
+        {
+            return _carDal.GetCarDetails();
+        }
 
         //public List<Car> GetCarsByBrandId(int brandId)
         //{

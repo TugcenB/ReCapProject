@@ -1,5 +1,4 @@
-﻿using Core.DataAccess;
-using Entities.Concrete;
+﻿using Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +7,13 @@ using System.Threading.Tasks;
 
 namespace Business.Abstract
 {
-    public interface IBrandService : IBusinessRepository<Brand>
+    public interface IBrandService
     {
+        void Add(Brand brand);
+        void Delete(Brand brand);
+        public List<Brand> GetAll();
+        public Brand GetById(int id);
+        public void Update(Brand brand);
+        
     }
 }

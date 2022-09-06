@@ -6,14 +6,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DataAccess.Abstract;
+using DataAccess.Concrete.EntityFramework;
 
 namespace Business.Abstract
 {
-    public interface ICarService:IBusinessRepository<Car>
+    public interface ICarService
     {
-        //List<Car> GetCarsByBrandId(int brandId);
-        //List<Car> GetCarsByColorId(int colorId);
-        //List<CarDetailDto> GetCarDetails();
-        
+        void Add(Car car);
+        void Delete(Car car);
+        List<Car> GetAll();
+        Car GetById(int id);
+        List<CarDetailDto> GetCarDetails();
+        void Update(Car car);
+
     }
 }
