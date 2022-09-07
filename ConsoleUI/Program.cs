@@ -5,6 +5,7 @@ using DataAccess.Abstract;
 using DataAccess.Concrete.InMemory;
 using DataAccess.Concrete.EntityFramework;
 using System;
+using Core.Utilities.Results;
 
 namespace ConsoleUI
 {
@@ -12,27 +13,26 @@ namespace ConsoleUI
     {
         static void Main(string[] args)
         {
-            //AddBrandTest(); -success
-            //DeleteBrandTest(); -success
-            //UpdateBrandTest(); -success
-            //GetAllBrandsTest(); -success
-            //GetByIdTest(); -success
+            //AddBrandTest(); //success
+            //DeleteBrandTest(); //success
+            //UpdateBrandTest(); //success
+            //GetAllBrandsTest(); //success
+            //GetByIdTest(); //success
 
-            //AddColorTest(); -success
-            //DeleteColorTest(); -success
-            //UpdateColorTest(); -success
-            //GetAllColorsTest(); -success
-            //GetByIdColorTest(); -success
+            //AddColorTest(); //success
+            //DeleteColorTest(); //success
+            //UpdateColorTest(); //success
+            //GetAllColorsTest(); //success
+            //GetByIdColorTest(); //success
 
-            //AddCarTest(); -success
-            //DeleteCarTest(); -success
-            //UpdateCarTest(); -fail
-            //GetAllCarsTest(); -success
-            //GetByIdCarTest(); -success
+            //AddCarTest(); //success
+            //DeleteCarTest(); //success
+            //UpdateCarTest(); //fail
+            //GetAllCarsTest(); //success
+            //GetByIdCarTest(); //success
 
-            //UpdateCarTest2(); -success
-            
-            
+            //UpdateCarTest2(); //success
+
         }
 
         private static void UpdateCarTest2()
@@ -44,16 +44,25 @@ namespace ConsoleUI
         private static void GetByIdCarTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            Console.WriteLine(carManager.GetById(1).DailyPrice);
+            Console.WriteLine(carManager.GetById(1).Data.DailyPrice);
         }
 
         private static void GetAllCarsTest()
         {
             CarManager carManager = new CarManager(new EfCarDal());
-            foreach (var car in carManager.GetCarDetails())
+            var result = carManager.GetCarDetails();
+            if (result.Success == true)
             {
-                Console.WriteLine("{0} - {1} - {2} - {3}",car.BrandName,car.Description,car.ColorName,car.DailyPrice);
+                foreach (var car in result.Data)
+                {
+                    Console.WriteLine("{0} - {1} - {2} - {3}", car.BrandName, car.Description, car.ColorName, car.DailyPrice);
+                }
             }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+            
         }
 
         private static void UpdateCarTest()
@@ -85,16 +94,25 @@ namespace ConsoleUI
         private static void GetByIdColorTest()
         {
             ColorManager colorManager = new ColorManager(new EfColorDal());
-            Console.WriteLine(colorManager.GetById(4).ColorName);
+            Console.WriteLine(colorManager.GetById(4).Data.ColorName);
         }
 
         private static void GetAllColorsTest()
         {
             ColorManager colorManager = new ColorManager(new EfColorDal());
-            foreach (var color in colorManager.GetAll())
+            var result = colorManager.GetAll();
+            if (result.Success == true)
             {
-                Console.WriteLine(color.ColorName);
+                foreach (var color in result.Data)
+                {
+                    Console.WriteLine(color.ColorName);
+                }
             }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+            
         }
 
         private static void UpdateColorTest()
@@ -125,29 +143,38 @@ namespace ConsoleUI
         private static void GetByIdTest()
         {
             BrandManager brandManager = new BrandManager(new EfBrandDal());
-            Console.WriteLine(brandManager.GetById(2).BrandName);
+            Console.WriteLine(brandManager.GetById(2).Data.BrandName);
         }
 
         private static void GetAllBrandsTest()
         {
             BrandManager brandManager = new BrandManager(new EfBrandDal());
-            foreach (var brand in brandManager.GetAll())
+            var result = brandManager.GetAll();
+            if (result.Success == true)
             {
-                Console.WriteLine(brand.BrandName);
+                foreach (var brand in result.Data)
+                {
+                    Console.WriteLine(brand.BrandName);
+                }
             }
+            else
+            {
+                Console.WriteLine(result.Message);
+            }
+            
         }
 
         private static void UpdateBrandTest()
         {
             BrandManager brandManager = new BrandManager(new EfBrandDal());
-            brandManager.Update(new Brand { BrandId = 2, BrandName = "Mercedes" });
+            brandManager.Update(new Brand { BrandId = 2, BrandName = "Audi" });
             //Audi has replaced by Mercedes
         }
 
         private static void DeleteBrandTest()
         {
             BrandManager brandManager = new BrandManager(new EfBrandDal());
-            brandManager.Delete(new Brand { BrandId = 6 });
+            brandManager.Delete(new Brand { BrandId=6});
             //The car that has BrandId = 6 has been deleted.
         }
 
