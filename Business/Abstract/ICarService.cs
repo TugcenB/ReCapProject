@@ -8,17 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using DataAccess.Abstract;
 using DataAccess.Concrete.EntityFramework;
+using Core.Utilities.Results;
 
 namespace Business.Abstract
 {
     public interface ICarService
     {
-        void Add(Car car);
-        void Delete(Car car);
-        List<Car> GetAll();
-        Car GetById(int id);
-        List<CarDetailDto> GetCarDetails();
-        void Update(Car car);
+        IResult Add(Car car);
+        IResult Delete(Car car);
+        IDataResult<List<Car>> GetAll();
+        IDataResult<Car> GetById(int id);
+        IDataResult<List<CarDetailDto>> GetCarDetails();
+        IResult Update(Car car);
 
     }
 }
