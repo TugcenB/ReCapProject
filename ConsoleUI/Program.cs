@@ -1,11 +1,6 @@
-﻿using Business.Abstract;
-using Business.Concrete;
-using Entities.Concrete;
-using DataAccess.Abstract;
-using DataAccess.Concrete.InMemory;
+﻿using Business.Concrete;
 using DataAccess.Concrete.EntityFramework;
-using System;
-using Core.Utilities.Results;
+using Entities.Concrete;
 
 namespace ConsoleUI
 {
@@ -33,6 +28,27 @@ namespace ConsoleUI
 
             //UpdateCarTest2(); //success
 
+            //UserAdd();
+            //RentalAddTest();
+
+        }
+
+        private static void RentalAddTest()
+        {
+            RentalManager rentalManager = new RentalManager(new EfRentalDal());
+            rentalManager.Add(new Rental
+            {
+                CarId = 2,
+                CustomerId = 4,
+                RentDate = DateTime.Now
+
+            });
+        }
+
+        private static void UserAdd()
+        {
+            UserManager userManager = new UserManager(new EfUserDal());
+            userManager.Add(new User { FirstName = "T", LastName = "B", Email = "asdf", Password = "12345" });
         }
 
         private static void UpdateCarTest2()
@@ -62,7 +78,7 @@ namespace ConsoleUI
             {
                 Console.WriteLine(result.Message);
             }
-            
+
         }
 
         private static void UpdateCarTest()
@@ -112,7 +128,7 @@ namespace ConsoleUI
             {
                 Console.WriteLine(result.Message);
             }
-            
+
         }
 
         private static void UpdateColorTest()
@@ -161,7 +177,7 @@ namespace ConsoleUI
             {
                 Console.WriteLine(result.Message);
             }
-            
+
         }
 
         private static void UpdateBrandTest()
@@ -174,7 +190,7 @@ namespace ConsoleUI
         private static void DeleteBrandTest()
         {
             BrandManager brandManager = new BrandManager(new EfBrandDal());
-            brandManager.Delete(new Brand { BrandId=6});
+            brandManager.Delete(new Brand { BrandId = 6 });
             //The car that has BrandId = 6 has been deleted.
         }
 
