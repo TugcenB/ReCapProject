@@ -3,6 +3,7 @@ using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
+using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -51,9 +52,11 @@ namespace Business.Concrete
 
         public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
-            if (DateTime.Now.Hour == 17)
+            IResult result = BusinessRules.Run(CheckIfDateTime17());
+
+            if (result != null)
             {
-                return new ErrorDataResult<List<CarDetailDto>>(Messages.MaintenanceTime);
+                return (IDataResult<List<CarDetailDto>>)result;
             }
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails());
         }
@@ -64,6 +67,13 @@ namespace Business.Concrete
             return new SuccessResult(Messages.Updated);
         }
 
-        
+        private IResult CheckIfDateTime17()
+        {
+            if (DateTime.Now.Hour == 17)
+            {
+                return new ErrorResult(Messages.MaintenanceTime);
+            }
+            return new SuccessResult();
+        }
     }
 }

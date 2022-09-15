@@ -15,5 +15,7 @@ namespace Business.Constants
         public static string CarAddedError = "Car has to be min 2 char and daily price has to be more than 0.";
         public static string MaintenanceTime= "Sistem Bakımda";
         internal static string ErrorRentalAdded = "Araç kiralanamaz.";
+        internal static string CarIsNotEmpty;
+        internal static string ACarCanNotMoreThan5Images;
     }
 }

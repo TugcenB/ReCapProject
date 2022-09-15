@@ -15,22 +15,10 @@ namespace Business.ValidationRules.FluentValidation
     {
         public RentalValidator()
         {
+            RuleFor(r=>r.CustomerId).NotEmpty();
+            RuleFor(r=>r.CarId).NotEmpty();
             
 
-        }
-
-        private bool IfRentalBefore(Rental rental)
-        {
-            IRentalDal rentalDal = new EfRentalDal();
-            var result = rentalDal.GetRentalDetails(r => r.ReturnDate == null && r.CarId == rental.CarId);
-            if (result.Count == 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
         }
     }
 }

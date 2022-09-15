@@ -23,11 +23,26 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("add")]
-        public IActionResult Add([FromForm]CarImage carImage)
+        public IActionResult Add([FromForm] CarImage carImage)
         {
-            
-             var result = _carImage.Add(carImage);
-            return Ok();
+
+            var result = _carImage.Add(carImage);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
+
+        [HttpGet("getall")]
+        public IActionResult GetAll()
+        {
+            var result = _carImage.GetAll();
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
         }
     }
 }
