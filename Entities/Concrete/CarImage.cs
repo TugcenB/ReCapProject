@@ -14,7 +14,7 @@ namespace Entities.Concrete
         public int Id { get; set; }
         public int CarId { get; set; }
 
-        [NotMapped]//For now i left as notmapped, when figured out, it will be updated.
+        [NotMapped]
         public IFormFile ImagePath { get; set; }
         public DateTime Date { get; set; }
 

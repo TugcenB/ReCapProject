@@ -19,13 +19,15 @@ namespace Business.Concrete
     public class CarImageManager : ICarImageService
     {
         ICarImageDal _carImageDal;
+        ICarService _carService;
 
-        public CarImageManager(ICarImageDal carImageDal)
+        public CarImageManager(ICarImageDal carImageDal, ICarService carService)
         {
             _carImageDal = carImageDal;
+            _carService = carService;
         }
         [ValidationAspect(typeof(CarImageValidator))]
-        public IResult Add(CarImage carImage)//In CarImageTable, imagepath is null for now, except that everyting works.
+        public IResult Add(CarImage carImage)
         {
             IResult result = BusinessRules.Run(CheckCarImageCount(carImage.CarId));
 
@@ -36,7 +38,7 @@ namespace Business.Concrete
 
             string FileName = carImage.ImagePath.FileName;
             string uniqueFileName = Guid.NewGuid().ToString() + "_" + FileName;
-            var imagePath = Path.Combine(Directory.GetCurrentDirectory(),"wwwroot/images/",FileName);
+            var imagePath = Path.Combine(Directory.GetCurrentDirectory(),"wwwroot/images/",uniqueFileName);
             carImage.ImagePath.CopyTo(new FileStream(imagePath,FileMode.Create));
             carImage.Date=DateTime.Now;
 
@@ -69,7 +71,7 @@ namespace Business.Concrete
         private IResult CheckCarImageCount(int carId)
         {
             var result = _carImageDal.GetAll(c => c.CarId==carId).Count;
-            if (result>5)
+            if (result>1)
             {
                 return new ErrorResult(Messages.ACarCanNotMoreThan5Images);
             }

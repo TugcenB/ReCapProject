@@ -29,9 +29,9 @@ namespace WebAPI.Controllers
             var result = _carImage.Add(carImage);
             if (result.Success)
             {
-                return Ok(result);
+                return Ok(result.Message);
             }
-            return BadRequest(result);
+            return BadRequest(result.Message);
         }
 
         [HttpGet("getall")]
