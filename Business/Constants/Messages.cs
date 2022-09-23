@@ -1,4 +1,5 @@
-﻿using Entities.DTOs;
+﻿using Core.Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +14,15 @@ namespace Business.Constants
         public static string Deleted = "Deleted";
         public static string Updated = "Updated";
         public static string CarAddedError = "Car has to be min 2 char and daily price has to be more than 0.";
-        public static string MaintenanceTime= "Sistem Bakımda";
-        internal static string ErrorRentalAdded = "Araç kiralanamaz.";
-        internal static string CarIsNotEmpty;
-        internal static string ACarCanNotMoreThan5Images;
+        public static string MaintenanceTime = "Sistem Bakımda";
+        public static string ErrorRentalAdded = "Araç kiralanamaz.";
+        public static string CarIsNotEmpty;
+        public static string ACarCanNotMoreThan5Images = "Araba fotoğrafları 5' ten fazla olamaz";
+        public static string UserNotFound = "Kullanıcı bulunamadı";
+        public static string PasswordError="Hatalı şifre";
+        public static string SuccessfulLogin="Başarılı login";
+        public static string UserAlreadyExists="Bu kullanıcı zaten mevcut";
+        public static string UserRegistered="Kullanıcı kaydoldu";
+        public static string AccessTokenCreated="Access Token başarıyla oluşturuldu.";
     }
 }

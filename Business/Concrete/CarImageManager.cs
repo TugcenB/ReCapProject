@@ -6,13 +6,7 @@ using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
-using Microsoft.AspNetCore.Http;
-using Microsoft.VisualStudio.TestPlatform.Utilities.Helpers.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using IResult = Core.Utilities.Results.IResult;
 
 namespace Business.Concrete
 {
