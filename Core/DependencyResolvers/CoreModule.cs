@@ -1,4 +1,5 @@
 ﻿using Core.Utilities.IoC;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ namespace Core.DependencyResolvers
     {
         public void Load(IServiceCollection serviceCollection)
         {
-            throw new NotImplementedException();
+            serviceCollection.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
         }
     }
 }
