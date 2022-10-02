@@ -26,7 +26,7 @@ namespace WebAPI.Controllers
             }
             return BadRequest(result);
         }
-        [HttpGet("getcardetails")]
+        [HttpGet("getcardetails"),Authorize]
         public IActionResult GetCarDetails()
         {
             var result = _carService.GetCarDetails();
@@ -47,7 +47,6 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
         [HttpPost("add")]
-        [Authorize]
         public IActionResult Add(Car car)
         {
             var result = _carService.Add(car);

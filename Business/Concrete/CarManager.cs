@@ -2,6 +2,7 @@
 using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Validation;
 using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
@@ -24,8 +25,8 @@ namespace Business.Concrete
         {
             _carDal = carDal;
         }
-        [SecuredOperation("admin")]
-        //[ValidationAspect(typeof(CarValidator))]
+        
+        [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
             
@@ -49,6 +50,7 @@ namespace Business.Concrete
             return new SuccessDataResult<Car>( _carDal.GetById(c=>c.Id==id));
         }
 
+        [SecuredOperation("admin")]
         public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
             IResult result = BusinessRules.Run(CheckIfDateTime17());
