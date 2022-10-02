@@ -1,25 +1,22 @@
-﻿using Core.Entities;
-using Core.Utilities.Results;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Runtime.ConstrainedExecution;
 using System.Text;
-using System.Threading.Tasks;
+using Core.Entities;
+using Microsoft.EntityFrameworkCore;
 
 namespace Core.DataAccess.EntityFramework
 {
-    public class EfEntityRepositoryBase<TEntity,TContext>
-        where TEntity : class,IEntity,new()
-        where TContext:DbContext,new()
+    public class EfEntityRepositoryBase<TEntity, TContext>
+       where TEntity : class, IEntity, new()
+       where TContext : DbContext, new()
     {
         public void Add(TEntity entity)
         {
             using (TContext context = new TContext())
             {
-                
+
                 var addedEntity = context.Entry(entity);
                 addedEntity.State = Microsoft.EntityFrameworkCore.EntityState.Added;
                 context.SaveChanges();

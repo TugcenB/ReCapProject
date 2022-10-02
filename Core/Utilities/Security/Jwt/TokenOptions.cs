@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Core.Utilities.Security.Jwt
+namespace Core.Utilities.Security.JWT
 {
     public class TokenOptions
     {

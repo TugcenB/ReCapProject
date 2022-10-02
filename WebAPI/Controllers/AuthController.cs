@@ -4,16 +4,17 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers
 {
-    [Route("api/(controller)")]
+    [Route("api/[controller]")]
     [ApiController]
     public class AuthController : Controller
     {
-        IAuthService _authService;
+        private IAuthService _authService;
 
         public AuthController(IAuthService authService)
         {
             _authService = authService;
         }
+
         [HttpPost("login")]
         public ActionResult Login(UserForLoginDto userForLoginDto)
         {
@@ -28,9 +29,10 @@ namespace WebAPI.Controllers
             {
                 return Ok(result.Data);
             }
-            return BadRequest(result.Message);
 
+            return BadRequest(result.Message);
         }
+
         [HttpPost("register")]
         public ActionResult Register(UserForRegisterDto userForRegisterDto)
         {
@@ -39,12 +41,14 @@ namespace WebAPI.Controllers
             {
                 return BadRequest(userExists.Message);
             }
-            var registerResult = _authService.Register(userForRegisterDto,userForRegisterDto.Password);
+
+            var registerResult = _authService.Register(userForRegisterDto, userForRegisterDto.Password);
             var result = _authService.CreateAccessToken(registerResult.Data);
             if (result.Success)
             {
                 return Ok(result.Data);
             }
+
             return BadRequest(result.Message);
         }
     }

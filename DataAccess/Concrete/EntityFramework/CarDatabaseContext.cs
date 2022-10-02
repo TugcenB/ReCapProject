@@ -14,6 +14,7 @@ namespace DataAccess.Concrete.EntityFramework
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=CarDatabase;Trusted_Connection=true");
+            optionsBuilder.EnableSensitiveDataLogging();
         }
 
         public DbSet<Car> Cars { get; set; }
@@ -22,11 +23,10 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Rental> Rentals { get; set; }
         public DbSet<CarImage> CarImages { get; set; }
-        public DbSet<OperationClaim> OperationClaims{ get; set; }
+        public DbSet<OperationClaim> OperationClaims { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
 
-        
 
     }
 }

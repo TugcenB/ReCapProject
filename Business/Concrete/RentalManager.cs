@@ -24,7 +24,7 @@ namespace Business.Concrete
         {
             _rentalDal = rentalDal;
         }
-        [ValidationAspect(typeof(RentalValidator))]
+        //[ValidationAspect(typeof(RentalValidator))]
         public IResult Add(Rental rental)
         {
             IResult result = BusinessRules.Run(CheckIfCarIsStillRentaled(rental.CarId));
