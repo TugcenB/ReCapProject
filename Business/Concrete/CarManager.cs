@@ -33,7 +33,7 @@ namespace Business.Concrete
         [CacheRemoveAspect("ICarService.GetAll")]
         public IResult Add(Car car)
         {
-            
+
             _carDal.Add(car);
             return new SuccessResult(Messages.Added);
         }
@@ -57,21 +57,21 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>(_carDal.GetAll());
         }
 
-        public IDataResult<List<Car>> GetByBrandId(int brandId)
+        public IDataResult<List<CarDetailDto>> GetByBrandId(int brandId)
         {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c=>c.BrandId == brandId));
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails().FindAll(c=>c.BrandId==brandId));
         }
 
-        public IDataResult<List<Car>> GetByColorId(int colorId)
+        public IDataResult<List<CarDetailDto>> GetByColorId(int colorId)
         {
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == colorId));
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails().FindAll(c=>c.ColorId==colorId));
         }
 
         [CacheAspect]
         [PerformanceAspect(5)]
         public IDataResult<Car> GetById(int id)
         {
-            return new SuccessDataResult<Car>( _carDal.GetById(c=>c.Id==id));
+            return new SuccessDataResult<Car>(_carDal.GetById(c => c.Id == id));
         }
 
         //[SecuredOperation("admin")]
