@@ -56,6 +56,17 @@ namespace Business.Concrete
         {
             return new SuccessDataResult<List<Car>>(_carDal.GetAll());
         }
+
+        public IDataResult<List<Car>> GetByBrandId(int brandId)
+        {
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c=>c.BrandId == brandId));
+        }
+
+        public IDataResult<List<Car>> GetByColorId(int colorId)
+        {
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == colorId));
+        }
+
         [CacheAspect]
         [PerformanceAspect(5)]
         public IDataResult<Car> GetById(int id)
@@ -63,7 +74,7 @@ namespace Business.Concrete
             return new SuccessDataResult<Car>( _carDal.GetById(c=>c.Id==id));
         }
 
-        [SecuredOperation("admin")]
+        //[SecuredOperation("admin")]
         public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
             IResult result = BusinessRules.Run(CheckIfDateTime17());
